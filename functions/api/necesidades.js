@@ -61,6 +61,38 @@ export async function onRequestPost({ request, env }) {
     const necesidad = typeof body.necesidad === 'string' ? body.necesidad.trim() : '';
     const molestia = typeof body.molestia === 'string' && body.molestia.trim() ? body.molestia.trim() : null;
     const email = typeof body.email === 'string' && body.email.trim() ? body.email.trim() : null;
+    const turnstileToken = typeof body.turnstileToken === 'string' ? body.turnstileToken.trim() : '';
+
+    // Verificación de Cloudflare Turnstile
+    if (env.TURNSTILE_SECRET_KEY) {
+      if (!turnstileToken) {
+        return jsonResponse({ error: 'Verificación de seguridad requerida.' }, 400);
+      }
+
+      try {
+        const verifyFormData = new FormData();
+        verifyFormData.append('secret', env.TURNSTILE_SECRET_KEY);
+        verifyFormData.append('response', turnstileToken);
+        const clientIp = request.headers.get('CF-Connecting-IP');
+        if (clientIp) {
+          verifyFormData.append('remoteip', clientIp);
+        }
+
+        const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+          method: 'POST',
+          body: verifyFormData,
+        });
+
+        const outcome = await verifyRes.json();
+        if (!outcome.success) {
+          return jsonResponse({ error: 'No se pudo validar que eres humano. Intenta de nuevo.' }, 403);
+        }
+      } catch (verifyErr) {
+        return jsonResponse({ error: 'Error al verificar seguridad: ' + verifyErr.message }, 500);
+      }
+    } else {
+      console.warn('TURNSTILE_SECRET_KEY no está configurada. Omitiendo validación Turnstile en entorno local.');
+    }
 
     // Validación de necesidad (entre 10 y 600 caracteres)
     if (!necesidad || necesidad.length < 10 || necesidad.length > 600) {

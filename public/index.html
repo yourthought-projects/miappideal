@@ -16,6 +16,9 @@
 
     <!-- Estilos compilados (Tailwind CSS + Personalizaciones) -->
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Cloudflare Turnstile -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body class="font-sans min-h-screen flex flex-col justify-between relative text-slate-700 selection:bg-brand-600 selection:text-white">
 
@@ -112,6 +115,11 @@
                             name="userEmail"
                             class="w-full bg-white/60 border border-white/80 focus:border-brand-500 focus:bg-white focus:ring-4 focus:ring-brand-500/15 rounded-2xl px-4 py-3 text-sm text-ink placeholder-slate-400 outline-none transition-all"
                             placeholder="tu@correo.com (Opcional)">
+                    </div>
+
+                    <!-- Cloudflare Turnstile Widget -->
+                    <div class="flex justify-center my-2">
+                        <div class="cf-turnstile" data-sitekey="0x4AAAAAAGOVnoir9l122woz" data-theme="light" data-language="es"></div>
                     </div>
 
                     <!-- Submit Button -->
@@ -368,6 +376,15 @@
                 return;
             }
 
+            const form = document.getElementById('necesidadForm');
+            const formData = new FormData(form);
+            const turnstileToken = (formData.get('cf-turnstile-response') || (window.turnstile ? window.turnstile.getResponse() : '') || '').toString().trim();
+
+            if (!turnstileToken) {
+                showToast('Por favor completa la verificación de seguridad.', 'info');
+                return;
+            }
+
             isSubmitting = true;
             const originalBtnHTML = submitBtn.innerHTML;
             submitBtn.disabled = true;
@@ -375,7 +392,7 @@
             submitBtn.innerHTML = `${SVGS.spinnerBtn}<span>Guardando necesidad...</span>`;
 
             try {
-                const payload = { necesidad };
+                const payload = { necesidad, turnstileToken };
                 if (molestia) payload.molestia = molestia;
                 if (email) payload.email = email;
 
@@ -409,6 +426,9 @@
                 submitBtn.disabled = false;
                 submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
                 submitBtn.innerHTML = originalBtnHTML;
+                if (window.turnstile) {
+                    turnstile.reset();
+                }
             }
         }
 
