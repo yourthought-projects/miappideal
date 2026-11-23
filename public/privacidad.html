@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#F8F8F9">
+    <title>Política de Privacidad - MiAppIdeal</title>
+
+    <!-- Favicon SVG -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Estilos compilados (Tailwind CSS + Personalizaciones) -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="font-sans min-h-screen flex flex-col justify-between relative text-slate-700 selection:bg-brand-600 selection:text-white">
+
+    <!-- Capa de fondo Aurora Degradado Estático -->
+    <div class="aurora-mesh-bottom" aria-hidden="true"></div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-white/55 backdrop-blur-xl border-b border-white/70">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <!-- Logo SVG -->
+            <a href="/" class="flex items-center group" aria-label="MiAppIdeal - Inicio">
+                <img src="logotipo.svg" alt="MiAppIdeal" class="h-10 w-auto group-hover:scale-[1.1] transition-transform drop-shadow-sm">
+            </a>
+
+            <!-- Navigation Actions -->
+            <div class="flex items-center gap-4">
+                <a href="/" class="text-sm font-semibold text-ink/70 hover:text-brand-700 transition-colors flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                    </svg>
+                    <span>Volver al inicio</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow px-4 sm:px-6 py-12 max-w-4xl mx-auto w-full">
+        <!-- Tarjeta Principal de Privacidad -->
+        <article class="glass-strong rounded-3xl p-6 sm:p-10 space-y-8 shadow-xl">
+            <header class="border-b border-slate-200/80 pb-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-brand-700 text-xs font-bold uppercase tracking-wider mb-3">
+                    <span>Transparencia y Privacidad</span>
+                </div>
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-ink tracking-tight">
+                    Política de Privacidad
+                </h1>
+                <p class="text-sm text-slate-500 mt-2 font-medium">
+                    Sitio web: <span class="font-mono text-ink">miappideal.start-it.dev</span> • Última actualización: Noviembre 2024
+                </p>
+            </header>
+
+            <section class="space-y-4">
+                <p class="text-sm sm:text-base leading-relaxed text-slate-700">
+                    En <strong>MiAppIdeal</strong> creemos en la simplicidad, la utilidad y el respeto absoluto a la privacidad de nuestros usuarios. Esta política describe cómo manejamos la información cuando utilizas nuestra plataforma abierta para registrar o apoyar necesidades cotidianas.
+                </p>
+            </section>
+
+            <!-- Sección 1 -->
+            <section class="space-y-2">
+                <h2 class="text-lg sm:text-xl font-bold text-ink flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-brand-600"></span>
+                    1. Publicaciones públicas y colaborativas
+                </h2>
+                <p class="text-sm leading-relaxed text-slate-600">
+                    Las necesidades, molestias o situaciones cotidianas que envías a través del formulario son públicas. Su propósito directo es inspirar a desarrolladores, creadores y comunidades técnicas para construir soluciones prácticas y accesibles. Al compartir una necesidad, aceptas que cualquier persona o equipo puede tomar dicho dolor como base para diseñar una aplicación, sin obligaciones contractuales ni exclusividad.
+                </p>
+                <div class="bg-amber-500/10 border border-amber-400/30 rounded-xl p-3.5 text-xs text-amber-900 leading-relaxed font-medium">
+                    <strong>Importante:</strong> Te recomendamos no incluir datos personales sensibles, nombres completos, direcciones particulares ni secretos comerciales en el texto de tu necesidad o molestia.
+                </div>
+            </section>
+
+            <!-- Sección 2 -->
+            <section class="space-y-2">
+                <h2 class="text-lg sm:text-xl font-bold text-ink flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-brand-600"></span>
+                    2. Correo electrónico opcional y estrictamente confidencial
+                </h2>
+                <p class="text-sm leading-relaxed text-slate-600">
+                    El campo de correo electrónico en el formulario es completamente voluntario. En caso de que decidas proporcionarlo:
+                </p>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-1 pl-2">
+                    <li><strong>Nunca se expone públicamente:</strong> No se muestra en el muro, en el código fuente ni en las respuestas de nuestra API pública.</li>
+                    <li><strong>Uso exclusivo:</strong> Se conserva de forma confidencial únicamente para avisarte en caso de que alguien desarrolle o lance una solución a tu necesidad.</li>
+                    <li><strong>Sin publicidad de terceros:</strong> No vendemos, no transferimos ni cedemos listas de correos a anunciantes ni servicios de marketing.</li>
+                </ul>
+            </section>
+
+            <!-- Sección 3 -->
+            <section class="space-y-2">
+                <h2 class="text-lg sm:text-xl font-bold text-ink flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-brand-600"></span>
+                    3. Prevención de votos duplicados (Hash anonimizado)
+                </h2>
+                <p class="text-sm leading-relaxed text-slate-600">
+                    Para que puedas votar y apoyar ideas con un solo clic sin tener que crearte una cuenta ni proporcionar contraseñas, utilizamos un mecanismo técnico de protección contra votos duplicados:
+                </p>
+                <p class="text-sm leading-relaxed text-slate-600">
+                    El servidor genera un identificador criptográfico unidireccional (hash <strong>SHA-256</strong>) combinando tu dirección IP de conexión con una clave secreta (<em>salt</em>). La dirección IP en texto claro <strong>nunca se almacena</strong> en nuestras bases de datos; únicamente se conserva el hash resultante para saber si dicho dispositivo ya apoyó esa necesidad.
+                </p>
+            </section>
+
+            <!-- Sección 4 -->
+            <section class="space-y-2">
+                <h2 class="text-lg sm:text-xl font-bold text-ink flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-brand-600"></span>
+                    4. Protección contra bots y spam (Cloudflare Turnstile)
+                </h2>
+                <p class="text-sm leading-relaxed text-slate-600">
+                    Para garantizar la disponibilidad del servicio y prevenir el envío masivo de spam o ataques de bots automatizados, este sitio web utiliza <strong>Cloudflare Turnstile</strong> en modo invisible en el formulario de envío.
+                </p>
+                <p class="text-sm leading-relaxed text-slate-600">
+                    Turnstile evalúa de forma silenciosa señales técnicas de navegación para verificar que la solicitud proviene de un usuario humano sin interrumpir con retos visuales o pruebas invasivas. Al interactuar con el formulario, aceptas el tratamiento técnico de datos de navegación necesario para dicha verificación de seguridad conforme a los términos de Cloudflare. Para más detalles, puedes consultar el documento oficial:
+                </p>
+                <p class="text-sm">
+                    <a href="https://www.cloudflare.com/en-gb/turnstile-privacy-policy/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-bold text-brand-600 hover:text-brand-700 underline underline-offset-2">
+                        <span>Cloudflare Turnstile Privacy Addendum</span>
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                        </svg>
+                    </a>
+                </p>
+            </section>
+
+            <!-- Sección 5 -->
+            <section class="space-y-2">
+                <h2 class="text-lg sm:text-xl font-bold text-ink flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-brand-600"></span>
+                    5. Contacto y solicitud de eliminación de datos
+                </h2>
+                <p class="text-sm leading-relaxed text-slate-600">
+                    En cualquier momento puedes solicitar la eliminación de tu correo electrónico registrado o de una necesidad que hayas publicado por error. Para gestionar cualquier solicitud relacionada con tu privacidad, escríbenos a:
+                </p>
+                <p class="text-sm">
+                    <a href="mailto:privacidad@start-it.dev" class="font-bold text-brand-600 hover:text-brand-700 underline">
+                        privacidad@start-it.dev
+                    </a>
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <!-- Footer oscuro con logotipo blanco -->
+    <footer class="relative mt-12 bg-ink text-slate-300 pt-12 pb-8 px-4 sm:px-6 border-t border-white/10 overflow-hidden">
+        <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+            <div class="absolute -top-24 left-1/2 -translate-x-1/2 h-64 w-[42rem] rounded-full bg-brand-500/20 blur-3xl"></div>
+        </div>
+
+        <div class="relative max-w-5xl mx-auto space-y-6">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <img src="logotipo_b.svg" alt="MiAppIdeal" class="h-10 w-auto"> <img src="start-it.svg" alt="Start-It" class="h-12 w-auto">
+                <p class="text-xs text-slate-400 font-medium">
+                    Plataforma abierta para detectar y resolver dolores cotidianos.
+                </p>
+            </div>
+
+            <hr class="border-white/10">
+
+            <div class="bg-white/5 border border-white/10 p-4 rounded-2xl backdrop-blur-sm">
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    <strong class="text-white font-bold">Sobre las necesidades enviadas:</strong> MiAppIdeal recopila problemas cotidianos para inspirar herramientas útiles. Al compartir tu situación, aceptas que es información pública y que cualquier persona o equipo puede construir una aplicación para resolverla, sin compromisos comerciales ni derechos de exclusividad.
+                </p>
+            </div>
+
+            <div class="text-center pt-2 flex flex-col sm:flex-row items-center justify-center gap-2 text-xs text-slate-500 font-medium">
+                <span>&copy; <span id="currentYear"></span> MiAppIdeal. Todos los derechos reservados.</span>
+                <span class="hidden sm:inline">&bull;</span>
+                <a href="/privacidad.html" class="underline hover:text-slate-300 transition-colors">Política de Privacidad</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
+

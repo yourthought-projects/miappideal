@@ -117,10 +117,8 @@
                             placeholder="tu@correo.com (Opcional)">
                     </div>
 
-                    <!-- Cloudflare Turnstile Widget -->
-                    <div class="flex justify-center my-2">
-                        <div class="cf-turnstile" data-sitekey="0x4AAAAAAGOVnoir9l122woz" data-theme="light" data-language="es"></div>
-                    </div>
+                    <!-- Cloudflare Turnstile Widget (Invisible) -->
+                    <div class="cf-turnstile" data-sitekey="0x4AAAAAAGOVnoir9l122woz" data-theme="light" data-language="es"></div>
 
                     <!-- Submit Button -->
                     <button
@@ -132,6 +130,9 @@
 
                     <p class="text-xs text-center text-slate-500 leading-relaxed pt-1">
                         Esto es un buzón público de necesidades. Al enviar, permites que cualquier desarrollador use este caso para crear una solución.
+                    </p>
+                    <p class="text-[11px] text-center text-slate-400 leading-relaxed">
+                        Protegido contra spam con Cloudflare Turnstile. Consulta nuestra <a href="/privacidad.html" class="underline hover:text-slate-600 transition-colors">Política de Privacidad</a>.
                     </p>
                 </form>
             </div>
@@ -258,10 +259,10 @@
                 </p>
             </div>
 
-            <div class="text-center pt-2">
-                <p class="text-xs text-slate-500 font-medium">
-                    &copy; <span id="currentYear"></span> MiAppIdeal. Todos los derechos reservados.
-                </p>
+            <div class="text-center pt-2 flex flex-col sm:flex-row items-center justify-center gap-2 text-xs text-slate-500 font-medium">
+                <span>&copy; <span id="currentYear"></span> MiAppIdeal. Todos los derechos reservados.</span>
+                <span class="hidden sm:inline">&bull;</span>
+                <a href="/privacidad.html" class="underline hover:text-slate-300 transition-colors">Política de Privacidad</a>
             </div>
         </div>
     </footer>
