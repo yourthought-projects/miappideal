@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#F8F8F9">
     <title>MiAppIdeal - Facilita tus tareas del día a día</title>
+
+    <!-- Favicon SVG -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,16 +25,20 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                     colors: {
+                        ink: '#111439',
+                        lilac: '#F8F8F9',
                         brand: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            200: '#bfdbfe',
-                            500: '#3b82f6',
-                            600: '#2563eb', // Azul brillante (CTA)
-                            700: '#1d4ed8', 
-                            800: '#1e40af', 
-                            900: '#1e3a8a', // Azul real (Títulos)
-                            950: '#172554',
+                            50:  '#eef2ff',
+                            100: '#e0e7ff',
+                            200: '#c7d2fe',
+                            300: '#a5b4fc',
+                            400: '#818cf8',
+                            500: '#4f6ef7',
+                            600: '#3355e8',
+                            700: '#2643c4',
+                            800: '#1c3399',
+                            900: '#111439',
+                            950: '#0a0c26',
                         }
                     }
                 }
@@ -37,53 +46,112 @@
         }
     </script>
     <style>
-        /* Custom scrollbar for modern light aesthetics */
-        ::-webkit-scrollbar {
-            width: 8px;
+        /* ===== Base ===== */
+        html { background-color: #F8F8F9; }
+        body { background-color: transparent; color: #111439; }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F8F8F9; }
+        ::-webkit-scrollbar-thumb { background: #c7c9d8; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a5a8bd; }
+
+        /* ===== Fondo Aurora Degradado Estático (Stripe-style) ===== */
+        /* Malla diagonal fija al viewport, se disuelve hacia arriba en #F8F8F9. */
+        .aurora-mesh-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100vw;
+            height: 75vh;
+            z-index: -10;
+            pointer-events: none;
+
+            background:
+                /* Cian en la esquina inferior izquierda */
+                radial-gradient(ellipse 65% 55% at 10% 90%, rgba(124, 232, 255, 0.90) 0%, rgba(124, 232, 255, 0) 70%),
+                /* Azul oscuro de acento profundo en el borde inferior central */
+                radial-gradient(ellipse 50% 45% at 35% 95%, rgba(17, 20, 57, 0.55) 0%, rgba(17, 20, 57, 0) 75%),
+                /* Lila/Violeta eléctrico en el centro */
+                radial-gradient(ellipse 70% 60% at 50% 80%, rgba(169, 96, 238, 0.90) 0%, rgba(169, 96, 238, 0) 75%),
+                /* Coral suave diagonal */
+                radial-gradient(ellipse 65% 55% at 70% 65%, rgba(255, 107, 139, 0.85) 0%, rgba(255, 107, 139, 0) 70%),
+                /* Amarillo ámbar dorado en la parte superior derecha de la malla */
+                radial-gradient(ellipse 55% 50% at 88% 50%, rgba(255, 203, 87, 0.90) 0%, rgba(255, 203, 87, 0) 65%),
+                /* Degradado base diagonal continuo */
+                linear-gradient(130deg,
+                    #7CE8FF 0%,
+                    #A960EE 35%,
+                    #FF6B8B 65%,
+                    #FFCB57 100%
+                );
+
+            /* Máscara de desvanecimiento vertical hacia la parte superior */
+            -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.75) 40%, rgba(0, 0, 0, 0) 100%);
+            mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.75) 40%, rgba(0, 0, 0, 0) 100%);
         }
-        ::-webkit-scrollbar-track {
-            background: #f8fafc;
+
+        /* ===== Glassmorphism ===== */
+        .glass {
+            background: rgba(255, 255, 255, 0.18);
+            -webkit-backdrop-filter: blur(18px) saturate(170%);
+            backdrop-filter: blur(18px) saturate(170%);
+            border: 1px solid rgba(255, 255, 255, 0.40);
+            box-shadow:
+                0 10px 40px -12px rgba(17, 20, 57, 0.18),
+                inset 0 1px 0 rgba(255, 255, 255, 0.55);
         }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
+        .glass-strong {
+            background: rgba(255, 255, 255, 0.32);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.40);
+            box-shadow:
+                0 22px 60px -18px rgba(17, 20, 57, 0.22),
+                inset 0 1px 0 rgba(255, 255, 255, 0.95);
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
+        @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+            .glass { background: rgba(255, 255, 255, 0.88); }
+            .glass-strong { background: rgba(255, 255, 255, 0.95); }
         }
-        .soft-card-glow {
-            box-shadow: 0 10px 30px -5px rgba(37, 99, 235, 0.08);
+
+        /* Elementos parallax */
+        [data-parallax] { will-change: transform; }
+
+        /* Accesibilidad: desactivar animaciones si el usuario lo pide */
+        @media (prefers-reduced-motion: reduce) {
+            * { scroll-behavior: auto !important; }
         }
     </style>
 </head>
-<body class="bg-gradient-to-b from-blue-50 via-sky-50/40 to-white text-slate-700 font-sans min-h-screen selection:bg-blue-500 selection:text-white flex flex-col justify-between">
+<body class="font-sans min-h-screen flex flex-col justify-between relative text-slate-700 selection:bg-brand-600 selection:text-white">
+
+    <!-- Capa de fondo Aurora Degradado Estático -->
+    <div class="aurora-mesh-bottom" aria-hidden="true"></div>
 
     <!-- Toast Notification Box -->
-    <div id="toast" class="fixed top-5 right-5 z-50 transform translate-x-full opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 bg-white border border-blue-200 text-slate-800 px-5 py-3.5 rounded-2xl shadow-xl">
-        <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+    <div id="toast" class="fixed top-5 right-5 z-50 transform translate-x-full opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 glass-strong text-ink px-5 py-3.5 rounded-2xl">
+        <div class="w-8 h-8 rounded-full bg-emerald-100/80 text-emerald-600 flex items-center justify-center shrink-0">
             <i id="toast-icon" class="fa-solid fa-circle-check text-base"></i>
         </div>
-        <span id="toast-message" class="text-sm font-semibold text-slate-800">Notificación</span>
+        <span id="toast-message" class="text-sm font-semibold text-ink">Notificación</span>
     </div>
 
     <!-- Header -->
-    <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-blue-100/80">
+    <header class="sticky top-0 z-40 bg-white/55 backdrop-blur-xl border-b border-white/70">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-            <!-- Logo -->
-            <a href="#" class="flex items-center gap-2.5 group">
-                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-900 via-brand-700 to-brand-500 flex items-center justify-center shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
-                    <i class="fa-solid fa-hand-holding-heart text-white text-base"></i>
-                </div>
-                <span class="text-xl font-extrabold tracking-tight text-brand-900">MiApp<span class="text-brand-600">Ideal</span></span>
+            <!-- Logo SVG -->
+            <a href="#" class="flex items-center group" aria-label="MiAppIdeal - Inicio">
+                <img src="logotipo.svg" alt="MiAppIdeal" class="h-10 w-auto group-hover:scale-[1.1] transition-transform drop-shadow-sm">
             </a>
 
             <!-- Navigation Actions -->
             <div class="flex items-center gap-4">
-                <a href="#muro" class="text-sm font-semibold text-slate-600 hover:text-brand-700 transition-colors flex items-center gap-2">
+                <a href="#muro" class="text-sm font-semibold text-ink/70 hover:text-brand-700 transition-colors flex items-center gap-2">
                     <i class="fa-solid fa-list-check text-brand-500"></i>
                     <span>Necesidades</span>
                 </a>
-                <a href="#formulario" class="bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all shadow-sm shadow-blue-600/20 hover:shadow-blue-600/40 hidden sm:inline-flex items-center gap-2">
+                <a href="#formulario" class="bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all shadow-lg shadow-brand-600/25 hover:shadow-brand-600/40 hidden sm:inline-flex items-center gap-2">
                     <i class="fa-solid fa-plus text-xs"></i>
                     <span>Contar mi necesidad</span>
                 </a>
@@ -94,14 +162,18 @@
     <main>
         <!-- Hero Section con Formulario Directo -->
         <section id="formulario" class="relative pt-10 pb-16 md:pt-16 md:pb-20 px-4 sm:px-6 max-w-5xl mx-auto">
-            <!-- Subtle Decorative Circles -->
-            <div class="absolute top-10 left-1/2 -translate-x-1/2 w-full max-w-3xl h-72 bg-blue-200/30 rounded-full blur-3xl pointer-events-none -z-10"></div>
+            <!-- Capas decorativas con parallax -->
+            <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+                <div data-parallax="-0.08" class="absolute -top-16 left-[6%] h-64 w-64 rounded-full bg-indigo-400/20 blur-3xl"></div>
+                <div data-parallax="0.06" class="absolute top-40 right-[4%] h-72 w-72 rounded-full bg-fuchsia-400/15 blur-3xl"></div>
+                <div data-parallax="-0.04" class="absolute bottom-0 left-1/3 h-56 w-56 rounded-full bg-sky-400/15 blur-3xl"></div>
+            </div>
 
             <div class="relative text-center max-w-3xl mx-auto mb-8">
-                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-100/80 border border-blue-200 text-brand-800 text-xs font-semibold uppercase tracking-wider mb-4 shadow-sm">
+                <!-- <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass text-brand-800 text-xs font-semibold uppercase tracking-wider mb-4">
                     <i class="fa-solid fa-heart text-brand-600"></i> Soluciones cotidianas reales
-                </span>
-                <h1 class="text-3xl sm:text-5xl font-extrabold text-brand-900 tracking-tight leading-tight mb-4">
+                </span> -->
+                <h1 class="text-3xl sm:text-5xl font-extrabold text-ink tracking-tight leading-tight mb-4">
                     ¿Qué tarea de tu día debería ser más fácil?
                 </h1>
                 <p class="text-base sm:text-lg text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
@@ -109,58 +181,57 @@
                 </p>
             </div>
 
-            <!-- Form Card -->
-            <div class="relative bg-white border border-blue-100 rounded-3xl p-6 sm:p-9 shadow-xl soft-card-glow max-w-2xl mx-auto">
+            <!-- Form Card (Glassmorphism) -->
+            <div class="relative glass-strong rounded-3xl p-6 sm:p-9 max-w-2xl mx-auto">
                 <form id="necesidadForm" class="space-y-5" onsubmit="handleFormSubmit(event)">
-                    <!-- Field 1: Situation / Pain Point -->
+                    <!-- Field 1 -->
                     <div>
-                        <label for="necesidadText" class="block text-sm font-bold text-brand-900 mb-2">
+                        <label for="necesidadText" class="block text-sm font-bold text-ink mb-2">
                             ¿Qué te gustaría poder hacer desde tu celular sin complicarte? <span class="text-rose-500">*</span>
                         </label>
-                        <textarea 
-                            id="necesidadText" 
+                        <textarea
+                            id="necesidadText"
                             name="necesidadText"
                             required
-                            rows="3" 
-                            class="w-full bg-slate-50 border border-slate-200 focus:border-brand-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 rounded-2xl px-4 py-3.5 text-sm text-slate-800 placeholder-slate-400 outline-none transition-all resize-y leading-relaxed"
+                            rows="3"
+                            class="w-full bg-white/60 border border-white/80 focus:border-brand-500 focus:bg-white focus:ring-4 focus:ring-brand-500/15 rounded-2xl px-4 py-3.5 text-sm text-ink placeholder-slate-400 outline-none transition-all resize-y leading-relaxed"
                             placeholder='Ej: "Organizar mis siembras sin crear cuentas ni hacer cálculos, algo simple casi como un juego..."'></textarea>
                     </div>
 
-                    <!-- Field 2: Current Annoyance -->
+                    <!-- Field 2 -->
                     <div>
-                        <label for="molestiaActual" class="block text-sm font-bold text-brand-900 mb-2">
+                        <label for="molestiaActual" class="block text-sm font-bold text-ink mb-2">
                             ¿Qué es lo que más te molesta de cómo lo haces hoy? <span class="text-slate-400 font-normal">(Opcional)</span>
                         </label>
-                        <input 
-                            type="text" 
-                            id="molestiaActual" 
+                        <input
+                            type="text"
+                            id="molestiaActual"
                             name="molestiaActual"
-                            class="w-full bg-slate-50 border border-slate-200 focus:border-brand-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 rounded-2xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition-all"
+                            class="w-full bg-white/60 border border-white/80 focus:border-brand-500 focus:bg-white focus:ring-4 focus:ring-brand-500/15 rounded-2xl px-4 py-3 text-sm text-ink placeholder-slate-400 outline-none transition-all"
                             placeholder='Ej: "Pierdo tiempo anotando en libretas o usando hojas de cálculo complicadas."'>
                     </div>
 
-                    <!-- Field 3: Email -->
+                    <!-- Field 3 -->
                     <div>
-                        <label for="userEmail" class="block text-sm font-bold text-brand-900 mb-2">
+                        <label for="userEmail" class="block text-sm font-bold text-ink mb-2">
                             Tu correo (si quieres probarla cuando exista) <span class="text-slate-400 font-normal">(Opcional)</span>
                         </label>
-                        <input 
-                            type="email" 
-                            id="userEmail" 
+                        <input
+                            type="email"
+                            id="userEmail"
                             name="userEmail"
-                            class="w-full bg-slate-50 border border-slate-200 focus:border-brand-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 rounded-2xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition-all"
+                            class="w-full bg-white/60 border border-white/80 focus:border-brand-500 focus:bg-white focus:ring-4 focus:ring-brand-500/15 rounded-2xl px-4 py-3 text-sm text-ink placeholder-slate-400 outline-none transition-all"
                             placeholder="tu@correo.com (Opcional)">
                     </div>
 
                     <!-- Submit Button -->
-                    <button 
-                        type="submit" 
-                        class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-4 px-6 rounded-2xl transition-all duration-200 shadow-lg shadow-blue-600/25 hover:shadow-blue-600/40 flex items-center justify-center gap-2.5 text-base active:scale-[0.99] mt-2">
+                    <button
+                        type="submit"
+                        class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-4 px-6 rounded-2xl transition-all duration-200 shadow-lg shadow-brand-600/30 hover:shadow-brand-600/45 flex items-center justify-center gap-2.5 text-base active:scale-[0.99] mt-2">
                         <i class="fa-solid fa-paper-plane text-sm"></i>
                         <span>Enviar mi necesidad</span>
                     </button>
 
-                    <!-- Microcopy Legal -->
                     <p class="text-xs text-center text-slate-500 leading-relaxed pt-1">
                         Esto es un buzón público de necesidades. Al enviar, permites que cualquier desarrollador use este caso para crear una solución.
                     </p>
@@ -168,120 +239,129 @@
             </div>
         </section>
 
-        <!-- Cómo Funciona (3 Bloques Limpios) -->
-        <section class="py-14 bg-white/70 border-y border-blue-100/80 px-4 sm:px-6">
-            <div class="max-w-5xl mx-auto">
+        <!-- Cómo Funciona -->
+        <section class="relative py-14 px-4 sm:px-6 overflow-hidden">
+            <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+                <div data-parallax="0.05" class="absolute top-0 left-[10%] h-52 w-52 rounded-full bg-violet-400/15 blur-3xl"></div>
+                <div data-parallax="-0.06" class="absolute bottom-0 right-[8%] h-60 w-60 rounded-full bg-blue-400/15 blur-3xl"></div>
+            </div>
+
+            <div class="relative max-w-5xl mx-auto">
                 <div class="text-center mb-10">
                     <span class="text-xs font-bold uppercase tracking-wider text-brand-600">Simple y directo</span>
-                    <h2 class="text-xl sm:text-2xl font-bold text-brand-900 mt-1">¿Cómo ayudamos a que exista esa app?</h2>
+                    <h2 class="text-xl sm:text-2xl font-bold text-ink mt-1">¿Cómo ayudamos a que exista esa app?</h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- Step 1 -->
-                    <div class="bg-blue-50/60 border border-blue-100 p-6 rounded-2xl text-center group hover:border-blue-200 hover:bg-blue-50 transition-all">
-                        <div class="w-12 h-12 rounded-2xl bg-white text-brand-600 shadow-md shadow-blue-500/10 flex items-center justify-center text-xl font-bold mb-4 mx-auto group-hover:scale-110 transition-transform">
+                    <div class="glass p-6 rounded-2xl text-center group hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                        <div class="w-12 h-12 rounded-2xl bg-white/90 text-brand-600 shadow-md shadow-brand-500/10 flex items-center justify-center text-xl font-bold mb-4 mx-auto group-hover:scale-110 transition-transform">
                             <i class="fa-solid fa-comment-dots"></i>
                         </div>
-                        <h3 class="font-bold text-brand-900 mb-2 text-base">1. Cuenta tu situación</h3>
+                        <h3 class="font-bold text-ink mb-2 text-base">1. Cuenta tu situación</h3>
                         <p class="text-sm text-slate-600 leading-relaxed">Describe qué te complica el día sin crear cuenta ni diseñar nada.</p>
                     </div>
 
                     <!-- Step 2 -->
-                    <div class="bg-blue-50/60 border border-blue-100 p-6 rounded-2xl text-center group hover:border-blue-200 hover:bg-blue-50 transition-all">
-                        <div class="w-12 h-12 rounded-2xl bg-white text-emerald-600 shadow-md shadow-emerald-500/10 flex items-center justify-center text-xl font-bold mb-4 mx-auto group-hover:scale-110 transition-transform">
+                    <div class="glass p-6 rounded-2xl text-center group hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                        <div class="w-12 h-12 rounded-2xl bg-white/90 text-emerald-600 shadow-md shadow-emerald-500/10 flex items-center justify-center text-xl font-bold mb-4 mx-auto group-hover:scale-110 transition-transform">
                             <i class="fa-solid fa-hand-pointer"></i>
                         </div>
-                        <h3 class="font-bold text-brand-900 mb-2 text-base">2. Suma tu voto</h3>
+                        <h3 class="font-bold text-ink mb-2 text-base">2. Suma tu voto</h3>
                         <p class="text-sm text-slate-600 leading-relaxed">Si ves una necesidad que también vives, apóyala con un clic.</p>
                     </div>
 
                     <!-- Step 3 -->
-                    <div class="bg-blue-50/60 border border-blue-100 p-6 rounded-2xl text-center group hover:border-blue-200 hover:bg-blue-50 transition-all">
-                        <div class="w-12 h-12 rounded-2xl bg-white text-amber-600 shadow-md shadow-amber-500/10 flex items-center justify-center text-xl font-bold mb-4 mx-auto group-hover:scale-110 transition-transform">
+                    <div class="glass p-6 rounded-2xl text-center group hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                        <div class="w-12 h-12 rounded-2xl bg-white/90 text-amber-600 shadow-md shadow-amber-500/10 flex items-center justify-center text-xl font-bold mb-4 mx-auto group-hover:scale-110 transition-transform">
                             <i class="fa-solid fa-mobile-screen-button"></i>
                         </div>
-                        <h3 class="font-bold text-brand-900 mb-2 text-base">3. Soluciones reales</h3>
+                        <h3 class="font-bold text-ink mb-2 text-base">3. Soluciones reales</h3>
                         <p class="text-sm text-slate-600 leading-relaxed">Los problemas más repetidos inspiran apps sencillas hechas para resolverlos.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Muro de Necesidades (Feed Interactivo) -->
-        <section id="muro" class="py-16 px-4 sm:px-6 max-w-5xl mx-auto">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-                <div>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900 tracking-tight">
-                        Lo que la gente necesita resolver hoy
-                    </h2>
-                    <p class="text-sm text-slate-600 mt-1 font-medium">Explora situaciones reales enviadas por personas de la comunidad.</p>
+        <!-- Muro de Necesidades -->
+        <section id="muro" class="relative py-16 px-4 sm:px-6 max-w-5xl mx-auto">
+            <div class="pointer-events-none absolute inset-0 overflow-hidden -z-0" aria-hidden="true">
+                <div data-parallax="0.07" class="absolute top-10 right-[10%] h-56 w-56 rounded-full bg-fuchsia-400/15 blur-3xl"></div>
+                <div data-parallax="-0.05" class="absolute bottom-20 left-[4%] h-64 w-64 rounded-full bg-indigo-400/15 blur-3xl"></div>
+            </div>
+
+            <div class="relative">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">
+                            Lo que la gente necesita resolver hoy
+                        </h2>
+                        <p class="text-sm text-slate-600 mt-1 font-medium">Explora situaciones reales enviadas por personas de la comunidad.</p>
+                    </div>
+
+                    <!-- Filters (Glass) -->
+                    <div class="flex flex-wrap items-center gap-1.5 glass p-1.5 rounded-2xl text-xs font-semibold">
+                        <button onclick="setFilter('mas-repetidas')" id="btn-mas-repetidas" class="filter-btn px-3.5 py-2 rounded-xl transition-all bg-brand-600 text-white shadow-md shadow-brand-600/25">
+                            Más repetidas
+                        </button>
+                        <button onclick="setFilter('recientes')" id="btn-recientes" class="filter-btn px-3.5 py-2 rounded-xl transition-all text-ink/70 hover:text-ink hover:bg-white/60">
+                            Recientes
+                        </button>
+                        <button onclick="setFilter('en-desarrollo')" id="btn-en-desarrollo" class="filter-btn px-3.5 py-2 rounded-xl transition-all text-ink/70 hover:text-ink hover:bg-white/60">
+                            En desarrollo
+                        </button>
+                        <button onclick="setFilter('lanzada')" id="btn-lanzada" class="filter-btn px-3.5 py-2 rounded-xl transition-all text-ink/70 hover:text-ink hover:bg-white/60">
+                            Lanzadas
+                        </button>
+                    </div>
                 </div>
 
-                <!-- Filters -->
-                <div class="flex flex-wrap items-center gap-1.5 bg-white p-1.5 rounded-2xl border border-blue-100 shadow-sm text-xs font-semibold">
-                    <button onclick="setFilter('mas-repetidas')" id="btn-mas-repetidas" class="filter-btn px-3.5 py-2 rounded-xl transition-all bg-brand-600 text-white shadow-sm">
-                        Más repetidas
-                    </button>
-                    <button onclick="setFilter('recientes')" id="btn-recientes" class="filter-btn px-3.5 py-2 rounded-xl transition-all text-slate-600 hover:text-brand-900 hover:bg-slate-100">
-                        Recientes
-                    </button>
-                    <button onclick="setFilter('en-desarrollo')" id="btn-en-desarrollo" class="filter-btn px-3.5 py-2 rounded-xl transition-all text-slate-600 hover:text-brand-900 hover:bg-slate-100">
-                        En desarrollo
-                    </button>
-                    <button onclick="setFilter('lanzada')" id="btn-lanzada" class="filter-btn px-3.5 py-2 rounded-xl transition-all text-slate-600 hover:text-brand-900 hover:bg-slate-100">
-                        Lanzadas
-                    </button>
+                <!-- Feed Grid -->
+                <div id="necesidadesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <!-- Dynamic cards -->
                 </div>
-            </div>
 
-            <!-- Feed Grid Container -->
-            <div id="necesidadesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <!-- Dynamic cards generated via JavaScript -->
-            </div>
+                <!-- Empty State -->
+                <div id="emptyState" class="hidden text-center py-12 glass border-dashed rounded-2xl">
+                    <i class="fa-solid fa-folder-open text-4xl text-slate-400 mb-3"></i>
+                    <p class="text-slate-600 text-sm font-semibold">No hay publicaciones en este filtro en este momento.</p>
+                </div>
 
-            <!-- Empty State -->
-            <div id="emptyState" class="hidden text-center py-12 border border-dashed border-blue-200 rounded-2xl bg-white/50">
-                <i class="fa-solid fa-folder-open text-4xl text-slate-300 mb-3"></i>
-                <p class="text-slate-500 text-sm font-semibold">No hay publicaciones en este filtro en este momento.</p>
-            </div>
-
-            <!-- Microcopy Footer for Feed -->
-            <div class="mt-12 text-center pt-8 border-t border-blue-100">
-                <p class="text-slate-600 text-sm font-medium">
-                    ¿Tu situación no está aquí? 
-                    <a href="#formulario" class="text-brand-600 hover:text-brand-700 font-bold underline underline-offset-4 ml-1 transition-colors">
-                        Sube y cuéntanos qué te gustaría facilitar.
-                    </a>
-                </p>
+                <div class="mt-12 text-center pt-8 border-t border-white/70">
+                    <p class="text-slate-600 text-sm font-medium">
+                        ¿Tu situación no está aquí?
+                        <a href="#formulario" class="text-brand-600 hover:text-brand-700 font-bold underline underline-offset-4 ml-1 transition-colors">
+                            Sube y cuéntanos qué te gustaría facilitar.
+                        </a>
+                    </p>
+                </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer con Aviso Legal Limpio -->
-    <footer class="bg-white border-t border-blue-100 pt-12 pb-8 px-4 sm:px-6">
-        <div class="max-w-5xl mx-auto space-y-6">
+    <!-- Footer oscuro con logotipo blanco -->
+    <footer class="relative mt-8 bg-ink text-slate-300 pt-12 pb-8 px-4 sm:px-6 border-t border-white/10 overflow-hidden">
+        <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+            <div class="absolute -top-24 left-1/2 -translate-x-1/2 h-64 w-[42rem] rounded-full bg-brand-500/20 blur-3xl"></div>
+        </div>
+
+        <div class="relative max-w-5xl mx-auto space-y-6">
             <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-8 h-8 rounded-xl bg-brand-600 flex items-center justify-center text-white text-xs font-bold">
-                        <i class="fa-solid fa-hand-holding-heart"></i>
-                    </div>
-                    <span class="text-lg font-bold text-brand-900 tracking-tight">MiAppIdeal</span>
-                </div>
-                <p class="text-xs text-slate-500 font-medium">
+                <img src="logotipo_b.svg" alt="MiAppIdeal" class="h-10 w-auto"> <img src="start-it.svg" alt="MiAppIdeal" class="h-12 w-auto">
+                <p class="text-xs text-slate-400 font-medium">
                     Plataforma abierta para detectar y resolver dolores cotidianos.
                 </p>
             </div>
 
-            <hr class="border-slate-100">
+            <hr class="border-white/10">
 
-            <!-- Disclaimer Legal -->
-            <div class="bg-slate-50 border border-slate-200/80 p-4 rounded-2xl">
-                <p class="text-xs text-slate-600 leading-relaxed">
-                    <strong class="text-brand-900 font-bold">Sobre las necesidades enviadas:</strong> MiAppIdeal recopila problemas cotidianos para inspirar herramientas útiles. Al compartir tu situación, aceptas que es información pública y que cualquier persona o equipo puede construir una aplicación para resolverla, sin compromisos comerciales ni derechos de exclusividad.
+            <div class="bg-white/5 border border-white/10 p-4 rounded-2xl backdrop-blur-sm">
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    <strong class="text-white font-bold">Sobre las necesidades enviadas:</strong> MiAppIdeal recopila problemas cotidianos para inspirar herramientas útiles. Al compartir tu situación, aceptas que es información pública y que cualquier persona o equipo puede construir una aplicación para resolverla, sin compromisos comerciales ni derechos de exclusividad.
                 </p>
             </div>
 
             <div class="text-center pt-2">
-                <p class="text-xs text-slate-400 font-medium">
+                <p class="text-xs text-slate-500 font-medium">
                     &copy; <span id="currentYear"></span> MiAppIdeal. Todos los derechos reservados.
                 </p>
             </div>
@@ -290,7 +370,6 @@
 
     <!-- JavaScript App Logic -->
     <script>
-        // Initial dataset strictly based on everyday situations (NO mention of "idea")
         const INITIAL_NECESIDADES = [
             {
                 id: 'item-1',
@@ -342,40 +421,58 @@
             }
         ];
 
-        // State variables
         let necesidades = [];
         let userVotes = new Set();
         let currentFilter = 'mas-repetidas';
 
-        // Initialize application on load
         window.addEventListener('DOMContentLoaded', () => {
             document.getElementById('currentYear').textContent = new Date().getFullYear();
             loadState();
             renderFeed();
+            initParallax();
         });
 
-        // Load data from LocalStorage
+        // ---------- Parallax ----------
+        let parallaxTicking = false;
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function updateParallax() {
+            const y = window.scrollY || window.pageYOffset;
+            document.querySelectorAll('[data-parallax]').forEach(el => {
+                const speed = parseFloat(el.getAttribute('data-parallax')) || 0;
+                el.style.transform = `translate3d(0, ${(y * speed).toFixed(2)}px, 0)`;
+            });
+            parallaxTicking = false;
+        }
+
+        function initParallax() {
+            if (reduceMotion) return;
+            window.addEventListener('scroll', () => {
+                if (!parallaxTicking) {
+                    window.requestAnimationFrame(updateParallax);
+                    parallaxTicking = true;
+                }
+            }, { passive: true });
+            window.addEventListener('resize', updateParallax);
+            updateParallax();
+        }
+
+        // ---------- Persistencia ----------
         function loadState() {
             const storedData = localStorage.getItem('miappideal_necesidades');
             const storedVotes = localStorage.getItem('miappideal_uservotes');
 
             if (storedData) {
-                try {
-                    necesidades = JSON.parse(storedData);
-                } catch (e) {
-                    necesidades = [...INITIAL_NECESIDADES];
-                }
+                try { necesidades = JSON.parse(storedData); }
+                catch (e) { necesidades = [...INITIAL_NECESIDADES]; }
             } else {
                 necesidades = [...INITIAL_NECESIDADES];
                 saveNecesidades();
             }
 
             if (storedVotes) {
-                try {
-                    userVotes = new Set(JSON.parse(storedVotes));
-                } catch (e) {
-                    userVotes = new Set();
-                }
+                try { userVotes = new Set(JSON.parse(storedVotes)); }
+                catch (e) { userVotes = new Set(); }
             }
         }
 
@@ -387,7 +484,7 @@
             localStorage.setItem('miappideal_uservotes', JSON.stringify(Array.from(userVotes)));
         }
 
-        // Form Submission Logic
+        // ---------- Formulario ----------
         function handleFormSubmit(event) {
             event.preventDefault();
 
@@ -400,56 +497,47 @@
 
             if (!necesidad) return;
 
-            // Create new record
             const newItem = {
                 id: 'item-' + Date.now(),
                 necesidad: necesidad,
                 molestia: molestia || null,
-                votos: 1, // Automatic initial vote by submitter
+                votos: 1,
                 estado: 'En evaluación',
                 createdAt: Date.now()
             };
 
-            // Add to state
             necesidades.unshift(newItem);
             userVotes.add(newItem.id);
             saveNecesidades();
             saveVotes();
 
-            // Clear Form Inputs
             necesidadInput.value = '';
             molestiaInput.value = '';
             emailInput.value = '';
 
-            // Toast feedback
             showToast('¡Tu necesidad ha sido registrada exitosamente!');
-
-            // Re-render feed
             renderFeed();
 
-            // Smooth Scroll to Muro
-            const muroSection = document.getElementById('muro');
-            muroSection.scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('muro').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Filter button handler
+        // ---------- Filtros ----------
         function setFilter(filterType) {
             currentFilter = filterType;
-            
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => {
-                btn.className = 'filter-btn px-3.5 py-2 rounded-xl transition-all text-slate-600 hover:text-brand-900 hover:bg-slate-100';
+
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.className = 'filter-btn px-3.5 py-2 rounded-xl transition-all text-ink/70 hover:text-ink hover:bg-white/60';
             });
 
             const activeBtn = document.getElementById(`btn-${filterType}`);
             if (activeBtn) {
-                activeBtn.className = 'filter-btn px-3.5 py-2 rounded-xl transition-all bg-brand-600 text-white shadow-sm';
+                activeBtn.className = 'filter-btn px-3.5 py-2 rounded-xl transition-all bg-brand-600 text-white shadow-md shadow-brand-600/25';
             }
 
             renderFeed();
         }
 
-        // Toggle vote action
+        // ---------- Votos ----------
         function toggleVote(id) {
             const item = necesidades.find(i => i.id === id);
             if (!item) return;
@@ -469,11 +557,11 @@
             renderFeed();
         }
 
-        // Render Cards inside Feed Grid
+        // ---------- Render ----------
         function renderFeed() {
             const container = document.getElementById('necesidadesGrid');
             const emptyState = document.getElementById('emptyState');
-            
+
             let filteredList = [...necesidades];
 
             if (currentFilter === 'mas-repetidas') {
@@ -502,22 +590,19 @@
                 const timeAgo = getTimeAgo(item.createdAt);
 
                 return `
-                    <div class="bg-white border border-blue-100 rounded-2xl p-6 flex flex-col justify-between hover:shadow-md transition-all duration-200">
+                    <div class="glass rounded-2xl p-6 flex flex-col justify-between hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
                         <div>
-                            <!-- Header Info -->
                             <div class="flex items-center justify-between gap-2 mb-3">
                                 ${badgeHTML}
-                                <span class="text-xs text-slate-400 font-medium">${timeAgo}</span>
+                                <span class="text-xs text-slate-500 font-medium">${timeAgo}</span>
                             </div>
 
-                            <!-- Main Need Statement -->
-                            <p class="text-brand-900 font-semibold text-base leading-snug mb-3">
+                            <p class="text-ink font-semibold text-base leading-snug mb-3">
                                 "${escapeHTML(item.necesidad)}"
                             </p>
 
-                            <!-- Annoyance Detail if available -->
                             ${item.molestia ? `
-                                <div class="bg-blue-50/70 border border-blue-100 rounded-xl p-3 mb-4">
+                                <div class="bg-white/55 border border-white/70 rounded-xl p-3 mb-4 backdrop-blur-sm">
                                     <span class="text-xs text-brand-800 font-bold block mb-0.5">
                                         <i class="fa-solid fa-circle-exclamation text-brand-600 mr-1"></i> Lo molesto de hoy:
                                     </span>
@@ -528,19 +613,18 @@
                             ` : ''}
                         </div>
 
-                        <!-- Card Action Footer -->
-                        <div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-3 mt-2">
-                            <span class="text-xs font-semibold text-slate-500">
-                                <strong class="text-brand-900 text-sm font-extrabold">${item.votos}</strong> ${item.votos === 1 ? 'persona la necesita' : 'personas la necesitan'}
+                        <div class="pt-4 border-t border-white/60 flex items-center justify-between gap-3 mt-2">
+                            <span class="text-xs font-semibold text-slate-600">
+                                <strong class="text-ink text-sm font-extrabold">${item.votos}</strong> ${item.votos === 1 ? 'persona la necesita' : 'personas la necesitan'}
                             </span>
 
-                            <button 
+                            <button
                                 onclick="toggleVote('${item.id}')"
-                                class="${isVoted 
-                                    ? 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100' 
-                                    : 'bg-brand-50 text-brand-700 border-blue-200 hover:bg-blue-100'} 
-                                    border px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 active:scale-95 shadow-sm">
-                                <i class="fa-solid ${isVoted ? 'fa-check text-emerald-600' : 'fa-thumbs-up text-brand-600'}"></i>
+                                class="${isVoted
+                                    ? 'bg-emerald-500/15 text-emerald-700 border-emerald-400/40 hover:bg-emerald-500/25'
+                                    : 'bg-brand-600 text-white border-transparent hover:bg-brand-700 shadow-md shadow-brand-600/25'}
+                                    border px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 active:scale-95">
+                                <i class="fa-solid ${isVoted ? 'fa-check text-emerald-600' : 'fa-thumbs-up'}"></i>
                                 <span>${isVoted ? 'Apoyada' : 'A mí también me pasa (+1)'}</span>
                             </button>
                         </div>
@@ -549,24 +633,23 @@
             }).join('');
         }
 
-        // Helper Badge Renderer
+        // ---------- Helpers ----------
         function getStatusBadgeHTML(estado) {
             if (estado === 'Lanzada') {
-                return `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">
+                return `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-500/15 text-emerald-700 border border-emerald-400/40 text-xs font-bold">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Lanzada
                 </span>`;
             } else if (estado === 'En desarrollo') {
-                return `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-amber-50 text-amber-800 border border-amber-200 text-xs font-bold">
+                return `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-amber-500/15 text-amber-800 border border-amber-400/40 text-xs font-bold">
                     <span class="w-2 h-2 rounded-full bg-amber-500"></span> En desarrollo
                 </span>`;
             } else {
-                return `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 border border-slate-200 text-xs font-bold">
+                return `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-500/10 text-slate-600 border border-slate-400/30 text-xs font-bold">
                     <span class="w-2 h-2 rounded-full bg-slate-400"></span> En evaluación
                 </span>`;
             }
         }
 
-        // Toast feedback manager
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
             const toastMessage = document.getElementById('toast-message');
@@ -589,7 +672,6 @@
             }, 3000);
         }
 
-        // Helper: Time ago text
         function getTimeAgo(timestamp) {
             const diffMinutes = Math.floor((Date.now() - timestamp) / (1000 * 60));
             if (diffMinutes < 60) return `Hace ${Math.max(1, diffMinutes)} min`;
@@ -599,7 +681,6 @@
             return `Hace ${diffDays} d`;
         }
 
-        // XSS sanitization
         function escapeHTML(str) {
             if (!str) return '';
             return str
