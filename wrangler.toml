@@ -1,0 +1,10 @@
+name = "miappideal"
+compatibility_date = "2024-11-01"
+pages_build_output_dir = "public"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "miappideal-db"
+database_id = "bbcd4573-5946-4bcf-9819-14a865fe610f"
+migrations_dir = "migrations"
+

@@ -13,116 +13,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        ink: '#111439',
-                        lilac: '#F8F8F9',
-                        brand: {
-                            50:  '#eef2ff',
-                            100: '#e0e7ff',
-                            200: '#c7d2fe',
-                            300: '#a5b4fc',
-                            400: '#818cf8',
-                            500: '#4f6ef7',
-                            600: '#3355e8',
-                            700: '#2643c4',
-                            800: '#1c3399',
-                            900: '#111439',
-                            950: '#0a0c26',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        /* ===== Base ===== */
-        html { background-color: #F8F8F9; }
-        body { background-color: transparent; color: #111439; }
 
-        /* Custom scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #F8F8F9; }
-        ::-webkit-scrollbar-thumb { background: #c7c9d8; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #a5a8bd; }
-
-        /* ===== Fondo Aurora Degradado Estático (Stripe-style) ===== */
-        /* Malla diagonal fija al viewport, se disuelve hacia arriba en #F8F8F9. */
-        .aurora-mesh-bottom {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100vw;
-            height: 75vh;
-            z-index: -10;
-            pointer-events: none;
-
-            background:
-                /* Cian en la esquina inferior izquierda */
-                radial-gradient(ellipse 65% 55% at 10% 90%, rgba(124, 232, 255, 0.90) 0%, rgba(124, 232, 255, 0) 70%),
-                /* Azul oscuro de acento profundo en el borde inferior central */
-                radial-gradient(ellipse 50% 45% at 35% 95%, rgba(17, 20, 57, 0.55) 0%, rgba(17, 20, 57, 0) 75%),
-                /* Lila/Violeta eléctrico en el centro */
-                radial-gradient(ellipse 70% 60% at 50% 80%, rgba(169, 96, 238, 0.90) 0%, rgba(169, 96, 238, 0) 75%),
-                /* Coral suave diagonal */
-                radial-gradient(ellipse 65% 55% at 70% 65%, rgba(255, 107, 139, 0.85) 0%, rgba(255, 107, 139, 0) 70%),
-                /* Amarillo ámbar dorado en la parte superior derecha de la malla */
-                radial-gradient(ellipse 55% 50% at 88% 50%, rgba(255, 203, 87, 0.90) 0%, rgba(255, 203, 87, 0) 65%),
-                /* Degradado base diagonal continuo */
-                linear-gradient(130deg,
-                    #7CE8FF 0%,
-                    #A960EE 35%,
-                    #FF6B8B 65%,
-                    #FFCB57 100%
-                );
-
-            /* Máscara de desvanecimiento vertical hacia la parte superior */
-            -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.75) 40%, rgba(0, 0, 0, 0) 100%);
-            mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.75) 40%, rgba(0, 0, 0, 0) 100%);
-        }
-
-        /* ===== Glassmorphism ===== */
-        .glass {
-            background: rgba(255, 255, 255, 0.18);
-            -webkit-backdrop-filter: blur(18px) saturate(170%);
-            backdrop-filter: blur(18px) saturate(170%);
-            border: 1px solid rgba(255, 255, 255, 0.40);
-            box-shadow:
-                0 10px 40px -12px rgba(17, 20, 57, 0.18),
-                inset 0 1px 0 rgba(255, 255, 255, 0.55);
-        }
-        .glass-strong {
-            background: rgba(255, 255, 255, 0.32);
-            -webkit-backdrop-filter: blur(24px) saturate(180%);
-            backdrop-filter: blur(24px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.40);
-            box-shadow:
-                0 22px 60px -18px rgba(17, 20, 57, 0.22),
-                inset 0 1px 0 rgba(255, 255, 255, 0.95);
-        }
-        @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-            .glass { background: rgba(255, 255, 255, 0.88); }
-            .glass-strong { background: rgba(255, 255, 255, 0.95); }
-        }
-
-        /* Elementos parallax */
-        [data-parallax] { will-change: transform; }
-
-        /* Accesibilidad: desactivar animaciones si el usuario lo pide */
-        @media (prefers-reduced-motion: reduce) {
-            * { scroll-behavior: auto !important; }
-        }
-    </style>
+    <!-- Estilos compilados (Tailwind CSS + Personalizaciones) -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body class="font-sans min-h-screen flex flex-col justify-between relative text-slate-700 selection:bg-brand-600 selection:text-white">
 
@@ -131,8 +24,8 @@
 
     <!-- Toast Notification Box -->
     <div id="toast" class="fixed top-5 right-5 z-50 transform translate-x-full opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 glass-strong text-ink px-5 py-3.5 rounded-2xl">
-        <div class="w-8 h-8 rounded-full bg-emerald-100/80 text-emerald-600 flex items-center justify-center shrink-0">
-            <i id="toast-icon" class="fa-solid fa-circle-check text-base"></i>
+        <div id="toast-icon-wrapper" class="w-8 h-8 rounded-full bg-emerald-100/80 text-emerald-600 flex items-center justify-center shrink-0">
+            <span id="toast-icon" class="flex items-center justify-center"></span>
         </div>
         <span id="toast-message" class="text-sm font-semibold text-ink">Notificación</span>
     </div>
@@ -148,11 +41,11 @@
             <!-- Navigation Actions -->
             <div class="flex items-center gap-4">
                 <a href="#muro" class="text-sm font-semibold text-ink/70 hover:text-brand-700 transition-colors flex items-center gap-2">
-                    <i class="fa-solid fa-list-check text-brand-500"></i>
+                    <svg class="w-4 h-4 text-brand-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2m-6 9 2 2 4-4" /></svg>
                     <span>Necesidades</span>
                 </a>
                 <a href="#formulario" class="bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all shadow-lg shadow-brand-600/25 hover:shadow-brand-600/40 hidden sm:inline-flex items-center gap-2">
-                    <i class="fa-solid fa-plus text-xs"></i>
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
                     <span>Contar mi necesidad</span>
                 </a>
             </div>
@@ -170,9 +63,6 @@
             </div>
 
             <div class="relative text-center max-w-3xl mx-auto mb-8">
-                <!-- <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass text-brand-800 text-xs font-semibold uppercase tracking-wider mb-4">
-                    <i class="fa-solid fa-heart text-brand-600"></i> Soluciones cotidianas reales
-                </span> -->
                 <h1 class="text-3xl sm:text-5xl font-extrabold text-ink tracking-tight leading-tight mb-4">
                     ¿Qué tarea de tu día debería ser más fácil?
                 </h1>
@@ -228,7 +118,7 @@
                     <button
                         type="submit"
                         class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-4 px-6 rounded-2xl transition-all duration-200 shadow-lg shadow-brand-600/30 hover:shadow-brand-600/45 flex items-center justify-center gap-2.5 text-base active:scale-[0.99] mt-2">
-                        <i class="fa-solid fa-paper-plane text-sm"></i>
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" /></svg>
                         <span>Enviar mi necesidad</span>
                     </button>
 
@@ -255,7 +145,7 @@
                     <!-- Step 1 -->
                     <div class="glass p-6 rounded-2xl text-center group hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
                         <div class="w-12 h-12 rounded-2xl bg-white/90 text-brand-600 shadow-md shadow-brand-500/10 flex items-center justify-center text-xl font-bold mb-4 mx-auto group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-comment-dots"></i>
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a.75.75 0 0 1-1.074-.775 5.978 5.978 0 0 1 1.2-2.883C4.167 15.908 3 14.07 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" /></svg>
                         </div>
                         <h3 class="font-bold text-ink mb-2 text-base">1. Cuenta tu situación</h3>
                         <p class="text-sm text-slate-600 leading-relaxed">Describe qué te complica el día sin crear cuenta ni diseñar nada.</p>
@@ -264,7 +154,7 @@
                     <!-- Step 2 -->
                     <div class="glass p-6 rounded-2xl text-center group hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
                         <div class="w-12 h-12 rounded-2xl bg-white/90 text-emerald-600 shadow-md shadow-emerald-500/10 flex items-center justify-center text-xl font-bold mb-4 mx-auto group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-hand-pointer"></i>
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-.672ZM12 2.25V4.5m5.834.166-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243-1.59-1.59" /></svg>
                         </div>
                         <h3 class="font-bold text-ink mb-2 text-base">2. Suma tu voto</h3>
                         <p class="text-sm text-slate-600 leading-relaxed">Si ves una necesidad que también vives, apóyala con un clic.</p>
@@ -273,7 +163,7 @@
                     <!-- Step 3 -->
                     <div class="glass p-6 rounded-2xl text-center group hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
                         <div class="w-12 h-12 rounded-2xl bg-white/90 text-amber-600 shadow-md shadow-amber-500/10 flex items-center justify-center text-xl font-bold mb-4 mx-auto group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-mobile-screen-button"></i>
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /></svg>
                         </div>
                         <h3 class="font-bold text-ink mb-2 text-base">3. Soluciones reales</h3>
                         <p class="text-sm text-slate-600 leading-relaxed">Los problemas más repetidos inspiran apps sencillas hechas para resolverlos.</p>
@@ -322,7 +212,7 @@
 
                 <!-- Empty State -->
                 <div id="emptyState" class="hidden text-center py-12 glass border-dashed rounded-2xl">
-                    <i class="fa-solid fa-folder-open text-4xl text-slate-400 mb-3"></i>
+                    <svg class="w-10 h-10 text-slate-400 mb-3 mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776" /></svg>
                     <p class="text-slate-600 text-sm font-semibold">No hay publicaciones en este filtro en este momento.</p>
                 </div>
 
@@ -346,7 +236,7 @@
 
         <div class="relative max-w-5xl mx-auto space-y-6">
             <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <img src="logotipo_b.svg" alt="MiAppIdeal" class="h-10 w-auto"> <img src="start-it.svg" alt="MiAppIdeal" class="h-12 w-auto">
+                <img src="logotipo_b.svg" alt="MiAppIdeal" class="h-10 w-auto"> <img src="start-it.svg" alt="Start-It" class="h-12 w-auto">
                 <p class="text-xs text-slate-400 font-medium">
                     Plataforma abierta para detectar y resolver dolores cotidianos.
                 </p>
@@ -370,65 +260,27 @@
 
     <!-- JavaScript App Logic -->
     <script>
-        const INITIAL_NECESIDADES = [
-            {
-                id: 'item-1',
-                necesidad: 'Sería bueno un lugar donde organizar mis siembras, sin tener que crear cuentas o hacer cálculos matemáticos, simple casi como un juego de jardinería.',
-                molestia: 'Pierdo tiempo anotando fechas de cultivo en libretas mojadas o calendarios que se me olvidan en casa.',
-                votos: 245,
-                estado: 'En desarrollo',
-                createdAt: Date.now() - (1000 * 60 * 60 * 18)
-            },
-            {
-                id: 'item-2',
-                necesidad: 'Dividir la cuenta del almuerzo o los gastos compartidos al instante sin obligar a nadie a descargar apps ni registrarse.',
-                molestia: 'Hacer cálculos en la mesa o enviar capturas por WhatsApp y esperar semanas a que me transfieran.',
-                votos: 312,
-                estado: 'Lanzada',
-                createdAt: Date.now() - (1000 * 60 * 60 * 48)
-            },
-            {
-                id: 'item-3',
-                necesidad: 'Alertas sencillas de mantenimiento del auto y la casa (cambio de aceite, filtro de agua, balones de gas) que avisen con tiempo.',
-                molestia: 'Olvidarme de los mantenimientos hasta que algo se rompe o se vence la revisión.',
-                votos: 180,
-                estado: 'En evaluación',
-                createdAt: Date.now() - (1000 * 60 * 60 * 5)
-            },
-            {
-                id: 'item-4',
-                necesidad: 'Una lista de compras rápida ordenada automáticamente por zonas del mercado local para no dar vueltas innecesarias.',
-                molestia: 'Anotar listas desordenadas en papel y terminar olvidando la mitad de las cosas.',
-                votos: 124,
-                estado: 'En evaluación',
-                createdAt: Date.now() - (1000 * 60 * 60 * 72)
-            },
-            {
-                id: 'item-5',
-                necesidad: 'Un recordatorio de medicamentos con botones gigantes y sonidos claros pensado para mis padres adultos mayores.',
-                molestia: 'Se confunden con las alarmas normales del celular o no entienden qué pastilla les toca tomar.',
-                votos: 267,
-                estado: 'En desarrollo',
-                createdAt: Date.now() - (1000 * 60 * 60 * 3)
-            },
-            {
-                id: 'item-6',
-                necesidad: 'Organizar los pedidos de clientes que recibo por WhatsApp en un tablero visual muy simple sin pagar sistemas costosos.',
-                molestia: 'Perder mensajes entre tantas conversaciones de chat y olvidar enviar algunos pedidos a tiempo.',
-                votos: 395,
-                estado: 'Lanzada',
-                createdAt: Date.now() - (1000 * 60 * 60 * 96)
-            }
-        ];
+        const SVGS = {
+            spinner: '<svg class="animate-spin w-8 h-8 text-brand-500 mb-3" fill="none" viewBox="0 0 24 24" aria-hidden="true"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>',
+            spinnerBtn: '<svg class="animate-spin w-4 h-4 text-white inline-block" fill="none" viewBox="0 0 24 24" aria-hidden="true"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>',
+            alertTriangle: '<svg class="w-8 h-8 text-amber-500 mb-3 mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg>',
+            exclamationCircle: '<svg class="w-3.5 h-3.5 text-brand-600 inline-block mr-1 -mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" /></svg>',
+            check: '<svg class="w-3.5 h-3.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>',
+            thumbsUp: '<svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23H5.907m.726-10.25L5.907 19.5m0 0H3.75A2.25 2.25 0 0 1 1.5 17.25v-7.5A2.25 2.25 0 0 1 3.75 7.5h2.157" /></svg>',
+            toastCheck: '<svg class="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>',
+            toastInfo: '<svg class="w-5 h-5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>',
+            toastError: '<svg class="w-5 h-5 text-rose-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" /></svg>'
+        };
 
         let necesidades = [];
         let userVotes = new Set();
         let currentFilter = 'mas-repetidas';
+        let isVoting = new Set();
+        let isSubmitting = false;
 
         window.addEventListener('DOMContentLoaded', () => {
             document.getElementById('currentYear').textContent = new Date().getFullYear();
-            loadState();
-            renderFeed();
+            fetchNecesidades();
             initParallax();
         });
 
@@ -457,68 +309,107 @@
             updateParallax();
         }
 
-        // ---------- Persistencia ----------
-        function loadState() {
-            const storedData = localStorage.getItem('miappideal_necesidades');
-            const storedVotes = localStorage.getItem('miappideal_uservotes');
+        // ---------- API y Estado ----------
+        async function fetchNecesidades() {
+            const container = document.getElementById('necesidadesGrid');
+            const emptyState = document.getElementById('emptyState');
 
-            if (storedData) {
-                try { necesidades = JSON.parse(storedData); }
-                catch (e) { necesidades = [...INITIAL_NECESIDADES]; }
-            } else {
-                necesidades = [...INITIAL_NECESIDADES];
-                saveNecesidades();
+            // Estado de carga inicial si aún no hay elementos
+            if (necesidades.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full py-12 flex flex-col items-center justify-center text-slate-400 glass rounded-2xl">
+                        ${SVGS.spinner}
+                        <p class="text-sm font-semibold text-slate-500">Cargando necesidades de la comunidad...</p>
+                    </div>
+                `;
             }
 
-            if (storedVotes) {
-                try { userVotes = new Set(JSON.parse(storedVotes)); }
-                catch (e) { userVotes = new Set(); }
+            try {
+                const res = await fetch('/api/necesidades');
+                if (!res.ok) {
+                    const errData = await res.json().catch(() => ({}));
+                    throw new Error(errData.error || 'No se pudieron cargar las necesidades.');
+                }
+                const data = await res.json();
+                necesidades = Array.isArray(data) ? data : [];
+                userVotes = new Set(necesidades.filter(i => i.userVoted).map(i => i.id));
+                renderFeed();
+            } catch (error) {
+                console.error('Error al cargar necesidades:', error);
+                showToast(error.message || 'Error al conectar con el servidor', 'error');
+                container.innerHTML = `
+                    <div class="col-span-full py-12 text-center glass rounded-2xl">
+                        ${SVGS.alertTriangle}
+                        <p class="text-sm font-semibold text-slate-600 mb-2">No se pudieron cargar las necesidades en este momento.</p>
+                        <button onclick="fetchNecesidades()" class="text-xs font-bold text-brand-600 hover:text-brand-700 underline">Reintentar</button>
+                    </div>
+                `;
             }
-        }
-
-        function saveNecesidades() {
-            localStorage.setItem('miappideal_necesidades', JSON.stringify(necesidades));
-        }
-
-        function saveVotes() {
-            localStorage.setItem('miappideal_uservotes', JSON.stringify(Array.from(userVotes)));
         }
 
         // ---------- Formulario ----------
-        function handleFormSubmit(event) {
+        async function handleFormSubmit(event) {
             event.preventDefault();
+            if (isSubmitting) return;
 
             const necesidadInput = document.getElementById('necesidadText');
             const molestiaInput = document.getElementById('molestiaActual');
             const emailInput = document.getElementById('userEmail');
+            const submitBtn = event.submitter || document.querySelector('#necesidadForm button[type="submit"]');
 
             const necesidad = necesidadInput.value.trim();
             const molestia = molestiaInput.value.trim();
+            const email = emailInput.value.trim();
 
             if (!necesidad) return;
 
-            const newItem = {
-                id: 'item-' + Date.now(),
-                necesidad: necesidad,
-                molestia: molestia || null,
-                votos: 1,
-                estado: 'En evaluación',
-                createdAt: Date.now()
-            };
+            if (necesidad.length < 10) {
+                showToast('La necesidad debe tener al menos 10 caracteres', 'error');
+                return;
+            }
 
-            necesidades.unshift(newItem);
-            userVotes.add(newItem.id);
-            saveNecesidades();
-            saveVotes();
+            isSubmitting = true;
+            const originalBtnHTML = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+            submitBtn.innerHTML = `${SVGS.spinnerBtn}<span>Guardando necesidad...</span>`;
 
-            necesidadInput.value = '';
-            molestiaInput.value = '';
-            emailInput.value = '';
+            try {
+                const payload = { necesidad };
+                if (molestia) payload.molestia = molestia;
+                if (email) payload.email = email;
 
-            showToast('¡Tu necesidad ha sido registrada exitosamente!');
-            renderFeed();
+                const res = await fetch('/api/necesidades', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
 
-            document.getElementById('muro').scrollIntoView({ behavior: 'smooth' });
+                const data = await res.json();
+                if (!res.ok) {
+                    throw new Error(data.error || 'No se pudo guardar la necesidad');
+                }
+
+                necesidades.unshift(data);
+                userVotes.add(data.id);
+
+                necesidadInput.value = '';
+                molestiaInput.value = '';
+                emailInput.value = '';
+
+                showToast('¡Tu necesidad ha sido registrada exitosamente!');
+                renderFeed();
+
+                document.getElementById('muro').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                console.error('Error al registrar necesidad:', error);
+                showToast(error.message || 'Error al enviar tu necesidad', 'error');
+            } finally {
+                isSubmitting = false;
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+                submitBtn.innerHTML = originalBtnHTML;
+            }
         }
 
         // ---------- Filtros ----------
@@ -538,23 +429,50 @@
         }
 
         // ---------- Votos ----------
-        function toggleVote(id) {
+        async function toggleVote(id) {
+            if (isVoting.has(id)) return; // Evitar doble clic
+
             const item = necesidades.find(i => i.id === id);
             if (!item) return;
 
-            if (userVotes.has(id)) {
-                userVotes.delete(id);
-                item.votos = Math.max(0, item.votos - 1);
-                showToast('Voto retirado', 'info');
-            } else {
-                userVotes.add(id);
-                item.votos += 1;
-                showToast('¡Apoyo sumado a esta necesidad!');
+            isVoting.add(id);
+            const btn = document.getElementById(`vote-btn-${id}`);
+            if (btn) {
+                btn.disabled = true;
+                btn.classList.add('opacity-70', 'pointer-events-none');
             }
 
-            saveNecesidades();
-            saveVotes();
-            renderFeed();
+            try {
+                const res = await fetch(`/api/necesidades/${encodeURIComponent(id)}/vote`, {
+                    method: 'POST'
+                });
+
+                const data = await res.json();
+                if (!res.ok) {
+                    throw new Error(data.error || 'Error al procesar voto');
+                }
+
+                item.votos = data.votos;
+                if (data.userVoted) {
+                    userVotes.add(id);
+                    showToast('¡Apoyo sumado a esta necesidad!');
+                } else {
+                    userVotes.delete(id);
+                    showToast('Voto retirado', 'info');
+                }
+
+                renderFeed();
+            } catch (error) {
+                console.error('Error en voto:', error);
+                showToast(error.message || 'Error al procesar voto', 'error');
+            } finally {
+                isVoting.delete(id);
+                const currentBtn = document.getElementById(`vote-btn-${id}`);
+                if (currentBtn) {
+                    currentBtn.disabled = false;
+                    currentBtn.classList.remove('opacity-70', 'pointer-events-none');
+                }
+            }
         }
 
         // ---------- Render ----------
@@ -588,6 +506,7 @@
                 const isVoted = userVotes.has(item.id);
                 const badgeHTML = getStatusBadgeHTML(item.estado);
                 const timeAgo = getTimeAgo(item.createdAt);
+                const isProcessingVote = isVoting.has(item.id);
 
                 return `
                     <div class="glass rounded-2xl p-6 flex flex-col justify-between hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
@@ -604,7 +523,7 @@
                             ${item.molestia ? `
                                 <div class="bg-white/55 border border-white/70 rounded-xl p-3 mb-4 backdrop-blur-sm">
                                     <span class="text-xs text-brand-800 font-bold block mb-0.5">
-                                        <i class="fa-solid fa-circle-exclamation text-brand-600 mr-1"></i> Lo molesto de hoy:
+                                        ${SVGS.exclamationCircle}Lo molesto de hoy:
                                     </span>
                                     <p class="text-xs text-slate-600 italic">
                                         ${escapeHTML(item.molestia)}
@@ -619,12 +538,15 @@
                             </span>
 
                             <button
+                                id="vote-btn-${item.id}"
                                 onclick="toggleVote('${item.id}')"
+                                ${isProcessingVote ? 'disabled' : ''}
                                 class="${isVoted
                                     ? 'bg-emerald-500/15 text-emerald-700 border-emerald-400/40 hover:bg-emerald-500/25'
                                     : 'bg-brand-600 text-white border-transparent hover:bg-brand-700 shadow-md shadow-brand-600/25'}
+                                    ${isProcessingVote ? 'opacity-70 pointer-events-none' : ''}
                                     border px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 active:scale-95">
-                                <i class="fa-solid ${isVoted ? 'fa-check text-emerald-600' : 'fa-thumbs-up'}"></i>
+                                ${isVoted ? SVGS.check : SVGS.thumbsUp}
                                 <span>${isVoted ? 'Apoyada' : 'A mí también me pasa (+1)'}</span>
                             </button>
                         </div>
@@ -654,13 +576,19 @@
             const toast = document.getElementById('toast');
             const toastMessage = document.getElementById('toast-message');
             const toastIcon = document.getElementById('toast-icon');
+            const toastIconWrapper = document.getElementById('toast-icon-wrapper');
 
             toastMessage.textContent = message;
 
             if (type === 'info') {
-                toastIcon.className = 'fa-solid fa-circle-info text-brand-600 text-base';
+                toastIconWrapper.className = 'w-8 h-8 rounded-full bg-indigo-100/80 text-brand-600 flex items-center justify-center shrink-0';
+                toastIcon.innerHTML = SVGS.toastInfo;
+            } else if (type === 'error') {
+                toastIconWrapper.className = 'w-8 h-8 rounded-full bg-rose-100/80 text-rose-600 flex items-center justify-center shrink-0';
+                toastIcon.innerHTML = SVGS.toastError;
             } else {
-                toastIcon.className = 'fa-solid fa-circle-check text-emerald-600 text-base';
+                toastIconWrapper.className = 'w-8 h-8 rounded-full bg-emerald-100/80 text-emerald-600 flex items-center justify-center shrink-0';
+                toastIcon.innerHTML = SVGS.toastCheck;
             }
 
             toast.classList.remove('translate-x-full', 'opacity-0');

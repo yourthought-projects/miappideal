@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Base ===== */
+html { background-color: #F8F8F9; }
+body { background-color: transparent; color: #111439; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #F8F8F9; }
+::-webkit-scrollbar-thumb { background: #c7c9d8; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #a5a8bd; }
+
+/* ===== Fondo Aurora Degradado Estático (Stripe-style) ===== */
+/* Malla diagonal fija al viewport, se disuelve hacia arriba en #F8F8F9. */
+.aurora-mesh-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 75vh;
+    z-index: -10;
+    pointer-events: none;
+
+    background:
+        /* Cian en la esquina inferior izquierda */
+        radial-gradient(ellipse 65% 55% at 10% 90%, rgba(124, 232, 255, 0.90) 0%, rgba(124, 232, 255, 0) 70%),
+        /* Azul oscuro de acento profundo en el borde inferior central */
+        radial-gradient(ellipse 50% 45% at 35% 95%, rgba(17, 20, 57, 0.55) 0%, rgba(17, 20, 57, 0) 75%),
+        /* Lila/Violeta eléctrico en el centro */
+        radial-gradient(ellipse 70% 60% at 50% 80%, rgba(169, 96, 238, 0.90) 0%, rgba(169, 96, 238, 0) 75%),
+        /* Coral suave diagonal */
+        radial-gradient(ellipse 65% 55% at 70% 65%, rgba(255, 107, 139, 0.85) 0%, rgba(255, 107, 139, 0) 70%),
+        /* Amarillo ámbar dorado en la parte superior derecha de la malla */
+        radial-gradient(ellipse 55% 50% at 88% 50%, rgba(255, 203, 87, 0.90) 0%, rgba(255, 203, 87, 0) 65%),
+        /* Degradado base diagonal continuo */
+        linear-gradient(130deg,
+            #7CE8FF 0%,
+            #A960EE 35%,
+            #FF6B8B 65%,
+            #FFCB57 100%
+        );
+
+    /* Máscara de desvanecimiento vertical hacia la parte superior */
+    -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.75) 40%, rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.75) 40%, rgba(0, 0, 0, 0) 100%);
+}
+
+/* ===== Glassmorphism ===== */
+.glass {
+    background: rgba(255, 255, 255, 0.18);
+    -webkit-backdrop-filter: blur(18px) saturate(170%);
+    backdrop-filter: blur(18px) saturate(170%);
+    border: 1px solid rgba(255, 255, 255, 0.40);
+    box-shadow:
+        0 10px 40px -12px rgba(17, 20, 57, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+.glass-strong {
+    background: rgba(255, 255, 255, 0.32);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.40);
+    box-shadow:
+        0 22px 60px -18px rgba(17, 20, 57, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass { background: rgba(255, 255, 255, 0.88); }
+    .glass-strong { background: rgba(255, 255, 255, 0.95); }
+}
+
+/* Elementos parallax */
+[data-parallax] { will-change: transform; }
+
+/* Accesibilidad: desactivar animaciones si el usuario lo pide */
+@media (prefers-reduced-motion: reduce) {
+    * { scroll-behavior: auto !important; }
+}
+

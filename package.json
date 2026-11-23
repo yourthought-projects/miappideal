@@ -1,0 +1,18 @@
+{
+  "name": "miappideal",
+  "version": "1.0.0",
+  "description": "Buzón público de necesidades cotidianas para creadores y desarrolladores",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler pages dev public --d1 DB=miappideal-db",
+    "db:migrate:local": "wrangler d1 migrations apply miappideal-db --local",
+    "db:seed:local": "wrangler d1 execute miappideal-db --local --file=./migrations/0002_seed.sql",
+    "build:css": "tailwindcss -i ./src/input.css -o ./public/styles.css --minify",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./public/styles.css --watch",
+    "build": "npm run build:css"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17",
+    "wrangler": "^4"
+  }
+}
